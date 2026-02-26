@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nova aba</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="shortcut icon" href="img/FavIcon/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+  <div style="opacity: 0; pointer-events: none;">
+    <button onclick="location.href = 'simpleSearch.html'">Modo Simples Rápido</button>
+  </div>
+  <!--Hora, dia e cumprimento-->
+  <div class="time">
+    <div style="display: flex;">
+      <div id="hour">00:00</div>
+      <div id="dayCycle" style="display: none;">AM</div>
+    </div>
+    <div id="day">Segunda, 01 de janeiro de 1970</div>
+    <p id="userinfos"></p>
+  </div>
+
+  <!--Logotipo do projeto-->
+  <div class="logo" onclick="openGitHub()">
+
+  </div>
+
+  <!--Parte da pesquisa-->
+  <div class="search">
+    <div class="searchengine google" onclick="changeEngine()" id="engsec"></div>
+    <input type="text" name="" id="searchinput" placeholder="Pesquise aqui" onkeydown="entKey(event)" />
+    <div class="searchengine lupe" id="searchbutton" onclick="searchingNow()"></div>
+  </div>
+
+  <!--A Charms-->
+  <div class="charms">
+    <!--Charms para Mobiles: Fechar-->
+    <div class="closeMobileCharms" onclick="closeCharms()">
+      <div class="lines" id="ltr"></div>
+      <div class="lines" id="rtl"></div>
+    </div>
+    <!--Charms normal-->
+    <div class="charmsicons locki" onclick="lock()"></div>
+    <div class="charmsicons useri" onclick="user()"></div>
+    <div class="charmsicons reci" onclick="recomendations()" style="display: none"></div>
+    <div class="charmsicons appsi" onclick="apps()"></div>
+    <div class="charmsicons settingsi" id="quickSetting" onclick="setting()"></div>
+    <div class="charmsicons settingsi" id="nSetting" onclick="appear_setting(), bts()" style="display: none"></div>
+    <div class="charmsicons reseti" onclick="reset()"></div>
+    <div class="pincharms notPinned" onclick="un_pin()" id="pinIcon"></div>
+  </div>
+
+  <!--Informações da Charms: Bloqueio-->
+  <div class="charmsinfo" id="lockinfo">
+    <div class="back" onclick="bts()"></div>
+    <h1>Bloquear</h1>
+    Insira a sua senha:
+    <input type="password" name="" id="passcharms" /><br />
+    <button onclick="savePassw('byCharms')">Salvar senha</button><br>
+    Ao salvar a senha, você utilizará ela até que salve outra no lugar dela.<br>
+    Se você não lembra a senha utilizada, recomenda-se que troque a senha<br>
+    Não use uma senha que você já use!<br>
+    <button onclick="lockall()">Bloquear</button>
+    <br /><br />
+    <h2>Protetor de tela</h2>
+    O protetor de tela é como um bloqueio de tela, ao ligar, uma animação é
+    iniciada, para usar tudo novamente, é necessário colocar a senha única.<br />
+    <button onclick="lockAllSS()">Iniciar protetor de tela</button>
+  </div>
+
+  <!--Informações da Charms: Usuário-->
+  <div class="charmsinfo" id="userinfo">
+    <div class="back" onclick="bts()"></div>
+    <h1>Usuário</h1>
+    Insira um nome de usuário<br />
+    Esse nome ficará visível na tela principal e na tela de bloqueio<br />
+    <input type="text" name="" id="usern" placeholder="Nome de usuário" /><br />
+    <button onclick="saveName('byCharms')">Salvar nome</button><br />
+    <label for="gen">Gênero</label><br />
+    <input type="radio" name="gen" id="mas" onchange="mascheck()" /> Masculino<br />
+    <input type="radio" name="gen" id="fem" onchange="femcheck()" /> Feminino<br />
+    <input type="radio" name="gen" id="pns" onchange="pnscheck()" /> Prefiro que não seja citado
+    <button onclick="userinfos()">Aplicar informações</button>
+  </div>
+
+  <!--Informações da Charms: Configurações-->
+  <div class="charmsinfo" id="settingsinfo">
+    <div class="back" onclick="bts()"></div>
+    <h1>Config.</h1>
+    <h2>Personalizações</h2>
+    <br /><br />
+    Imagem de fundo<br />
+    <input type="radio" name="image" id="img1" onchange="image1()" />
+    Por do Sol<br />
+    <input type="radio" name="image" id="img2" onchange="image2()" /> Fundo do
+    mar<br />
+    <input type="radio" name="image" id="img3" onchange="image3()" />
+    Gradiente azulado com roxo<br />
+    <input type="radio" name="image" id="img4" onchange="image4()" />
+    Universo<br />
+    <input type="radio" name="image" id="img5" onchange="image5()" /> Nascer
+    do sol<br />
+    <input type="radio" name="image" id="img5" onchange="image6()" />
+    Floresta<br />
+    <input type="radio" name="image" id="colorRand" onchange="colorImage()" />
+    Cor sólida randômica <br />
+    <input type="radio" name="image" id="colorChoose" onchange="selectColorImage()" />
+    Cor sólida escolhida pelo usuário<br />
+    <input type="radio" name="image" id="gradRand" onchange="colorGradient()" />
+    Gradiente aleatório <br />
+    <input type="radio" name="image" id="gradChoose" onchange="selectColorGradient()" />
+    Gradiente montado pelo usuário<br />
+    <input type="radio" name="image" id="imgChoose" onchange="userImage()" />
+    Selecione sua imagem de fundo<br />
+    <button onclick="applyimg()" id="buttontoApply" ondblclick="forceAppearPopup()">Aplicar</button><br />
+    Caso já tenha feito um gradiente ou escolhido a cor sólida, aperte duas vezes no botão para abrir o popup<br><br>
+    <!--<p>
+      Aviso: Ao checar as caixas, as informações da charms fechará, isso
+      inclui as configurações
+    </p>
+    <label for="transpEffect">Efeito de transparência</label>
+    <input type="checkbox" name="transpEffect" id="transpToggle" checked onchange="transpEffect()" /><br />
+    <label for="blurEffect">Efeito de blur</label>
+    <input type="checkbox" name="blurEffect" id="blurToggle" checked onchange="blurEffect()" />-->
+    <p>
+      Na tela de bloqueio, ao desativar o blur, ela fica sem transparência,
+      para evitar que dados sejam expostos.
+    </p>
+
+    <h2>Pesquisas</h2>
+    <label for="newTab">Abrir em nova aba</label>
+    <input type="checkbox" name="newTab" id="tabToggle" checked onchange="un_tab()" />
+    <p>Aviso: essa configuração não é aplicada na seção Recomendações</p>
+    <label for="enableRecomendations">Habliltar recomendações</label>
+    <input type="checkbox" name="enableRecomendations" id="enableRecomendations" onchange="recomendationsEnable()" />
+    <p>Essa configuração habililta o botão recomendações da Charms</p>
+
+    <h2>Acessibilidade e visão</h2>
+    <h3>Relógio</h3>
+    Alterar a cor do relógio
+    <div class="alignAcessButtons">
+      <div class="blackClock"
+        onclick="document.querySelector('.time').style.color = '#191919', localStorage.setItem('watchColor', 1)"></div>
+      <div class="whiteClock"
+        onclick="document.querySelector('.time').style.color = '#ffffff', localStorage.setItem('watchColor', 0)"></div>
+    </div>
+    <label for="clockBckg">Fundo no relógio</label>
+    <input type="checkbox" name="" id="clockBckg" onchange="clockBckg()">
+    <p>Essa função traz um fundo para o relógio, para que ele seja mais visível.</p>
+    <div class="buttonsSize">
+      <h3>Botões de pesquisa</h3>
+      Tamanho dos Botões:<br>
+      <input type="radio" name="buttonsSize" id="bsc1" onchange="size1()">
+      Pequeno<br>
+      <input type="radio" name="buttonsSize" id="bsc2" checked onchange="size2()">
+      Médio (Padrão)<br>
+      <input type="radio" name="buttonsSize" id="bsc3" onchange="size3()">
+      Grande<br>
+      <button onclick="applyBtnSize()">Aplicar</button><br />
+    </div>
+    <!--<button
+      onclick="document.getElementById('settingApp').style.transform = 'scale(1)', document.getElementById('settingHided').removeAttribute('style'), bts(), focusSet()">Abrir
+      App Config.</button>-->
+  </div>
+
+  <!--Informações da Charms: Recarregar-->
+  <div class="charmsinfo" id="resetinfo">
+    <div class="back" onclick="bts()"></div>
+    <h1>Recarregar site</h1>
+    Clique no botão abaixo para recarregar o site<br />
+    É o mesmo efeito do que apertar a tecla F5 ou apertar o botão de
+    recarregar<br />
+    <button onclick="reloadpage()">Recarregar</button>
+    <h2>Modo simples</h2>
+    Se você acha que o site está muito confuso, você pode recarregar de modo mais simples.<br>
+    <button onclick="reloadSpage()">Recarregar no modo simples</button>
+    <h2>Limpar definições</h2>
+    Caso queira limpar os dados de personalização, usuário, senha e outras definições, você pode limpá-las clicando no
+    botão abaixo.<br>
+    O site será reiniciado e os dados serão limpos quando clicar.<br>
+    <button onclick="localStorage.clear(), location.href = 'index.html'">Limpar dados</button>
+    <h2>Reload in U.S. English</h2>
+    If you want to use the site in English or don't know the Portuguese, you can reload the page so that it is in
+    English<br>
+    <button onclick="location.href = 'enUsNormal.html'">Reload in English</button>
+
+  </div>
+
+  <!--Informações da Charms: Recomendações-->
+  <div class="charmsinfo" id="recomendations">
+    <div class="back" onclick="bts()"></div>
+    <h1>Recomendações</h1>
+    Os sites serão abertos em uma nova aba
+    <h2>Para estudantes do IFSP</h2>
+
+    <a href="https://ecad.ifspcaraguatatuba.edu.br" class="links" target="_blank">
+      <div class="linkc">EcAD</div>
+    </a>
+
+    <a href="https://suap.ifsp.edu.br" class="links" target="_blank">
+      <div class="linkc">SUAP</div>
+    </a>
+
+    <a href="https://ifspcaraguatatuba.edu.br" class="links" target="_blank">
+      <div class="linkc">Site do IFSP - Caraguatatuba</div>
+    </a>
+
+    <div id="recGames">
+      <h2>Jogos Online</h2>
+
+      <a href="https://krunker.io" class="links" target="_blank">
+        <div class="linkc">Krunker</div>
+      </a>
+
+      <a href="https://chess.com" class="links" target="_blank">
+        <div class="linkc">Chess</div>
+      </a>
+
+      <a href="https://tetr.io" class="links" target="_blank">
+        <div class="linkc">Tetr.io</div>
+      </a>
+
+      <a href="https://roblox.com" class="links" target="_blank">
+        <div class="linkc">Roblox</div>
+      </a>
+
+      <a href="https://friv.com" class="links" target="_blank">
+        <div class="linkc">Friv</div>
+      </a>
+    </div>
+
+    <h2>Trabalhos</h2>
+
+    <a href="https://office.com" class="links" target="_blank">
+      <div class="linkc">Microsoft 365</div>
+    </a>
+
+    <a href="https://canva.com" class="links" target="_blank">
+      <div class="linkc">Canva</div>
+    </a>
+
+    <h2>Serviços do Google mais usados</h2>
+
+    <a href="https://gmail.com" class="links" target="_blank">
+      <div class="linkc">Gmail</div>
+    </a>
+
+    <a href="https://drive.google.com" class="links" target="_blank">
+      <div class="linkc">Drive</div>
+    </a>
+    <a href="https://youtube.com" class="links" target="_blank">
+      <div class="linkc">Youtube</div>
+    </a>
+  </div>
+
+  <!--Informações da Charms: Aplicativos-->
+  <div class="charmsinfo" id="appsinfo">
+    <div class="back" onclick="bts()"></div>
+    <h1>Aplicações</h1>
+    <div class="linkc"
+      onclick="document.getElementById('NpApp').style.transform = 'scale(1)', document.getElementById('npHided').removeAttribute('style'), focusNp()">
+      Bloco de notas
+    </div>
+    <div class="linkc"
+      onclick="document.getElementById('clApp').style.transform = 'scale(1)', document.getElementById('clHided').removeAttribute('style'), focusCalc()"
+      ondblclick="bts(), document.getElementById('clHided').removeAttribute('style')">
+      Calculadora
+    </div>
+    <div class="linkc"
+      onclick="document.getElementById('mpApp').style.transform = 'scale(1)', document.getElementById('mpHided').removeAttribute('style'), focusMp()"
+      ondblclick="bts()">
+      Reprodutor de música
+    </div>
+    <div class="linkc" id="ghCharms" onclick="openGhost(), focusGh()" ondblclick="bts()">
+      Ghost
+    </div>
+    <!--<div class="linkc"
+      onclick="document.getElementById('settingApp').style.transform = 'scale(1)', document.getElementById('settingHided').removeAttribute('style'), focusSet()"
+      ondblclick="bts()">
+      Configurações
+    </div>-->
+
+    <div class="resetPosition">
+      <h2>Restaurar posições</h2>
+      Caso algum aplicativo tenha saido acidentalmente para fora da área que se pode mexer, você pode voltar ele para a
+      posição original dele.<br>
+      <button onclick="resetNotepad()">Bloco de notas</button>
+      <button onclick="resetCalc()">Calculadora</button>
+      <button onclick="resetMusPlay()">Reprodutor de música</button>
+      <button onclick="resetGhost()" id="ghButton">Ghost</button>
+    </div>
+    <div class="makeSnap">
+      <h2>Faça mais com o Snap!</h2>
+      Tenha uma melhor produtividade com o Snap, separe suas janelas da melhor forma possível para o uso, para usar:<br>
+      Aparelhos móveis: Basta clicar no botão de movimentar<br>
+      Desktop: Clique com o botão direito no botão de minimizar/maximizar app
+    </div>
+  </div>
+
+
+  <!--Popup de "Escolha a sua cor"-->
+  <div class="chooseColor">
+    <h1>Escolha a cor sólida</h1>
+    <input type="color" name="" id="colorChoosed" />
+    <p>Cor do relógio:</p>
+    <div class="alignAcessButtonsColors">
+      <div class="blackClock"
+        onclick="document.querySelector('.time').style.color = '#191919', localStorage.setItem('watchColor', 1)"></div>
+      <div class="whiteClock"
+        onclick="document.querySelector('.time').style.color = '#ffffff', localStorage.setItem('watchColor', 0)"></div>
+    </div>
+    <div class="bottomPopup">
+      <div class="leftPop">
+        <input type="checkbox" name="" id="closeThis" checked />
+        <label for="closeThis">Fechar janela ao aplicar cor</label>
+      </div>
+      <button onclick="applyColor()">Aplicar cor</button>
+      <button onclick="closePop()">Cancelar</button>
+    </div>
+  </div>
+
+  <!--Popup de "Escolha o seu gradiente"-->
+  <div class="chooseGradient">
+    <h1>Escolha as cores que farão parte do gradiente</h1>
+    <input type="color" name="" id="colorChoosed1" />
+    <input type="color" name="" id="colorChoosed2" />
+    <p>Cor do relógio:</p>
+    <div class="alignAcessButtonsColors">
+      <div class="blackClock"
+        onclick="document.querySelector('.time').style.color = '#191919', localStorage.setItem('watchColor', 1)"></div>
+      <div class="whiteClock"
+        onclick="document.querySelector('.time').style.color = '#ffffff', localStorage.setItem('watchColor', 0)"></div>
+    </div>
+    <div class="bottomPopup">
+      <div class="leftPop">
+        <input type="checkbox" name="" id="closeThisGd" checked />
+        <label for="closeThisGd" style="width: 150px">Fechar janela ao criar o gradiente</label>
+      </div>
+      <button onclick="applyGradient()">Criar gradiente</button>
+      <button onclick="closePop()">Cancelar</button>
+    </div>
+  </div>
+
+  <!--Popup de "Escolha a sua imagem"-->
+  <div class="chooseImage">
+    <h1>Escolha a sua imagem</h1>
+    <div class="alignImageChoose">
+      <div class="alignNames">
+        <label for="imageToBckg" class="labelImage">Escolher imagem</label>
+        Nome do arquivo: <p id="nameImg">Não selecionado</p>
+      </div>
+      <input type="file" name="" id="imageToBckg" accept="image/*" class="imageInput">
+      <div class="imagePreview" id="prevImg"></div>
+    </div>
+    <p>Cor do relógio:</p>
+    <div class="alignAcessButtonsColors">
+      <div class="blackClock"
+        onclick="document.querySelector('.time').style.color = '#191919', localStorage.setItem('watchColor', 1)"></div>
+      <div class="whiteClock"
+        onclick="document.querySelector('.time').style.color = '#ffffff', localStorage.setItem('watchColor', 0)"></div>
+    </div>
+    <div class="bottomPopup">
+      <button onclick="applyImageFile()">Aplicar imagem</button>
+      <button onclick="closePop()">Fechar</button>
+    </div>
+  </div>
+
+  <!--Bloco de notas-->
+  <div class="notepad" id="NpApp" style="transform: scale(0)" onclick="focusNp()">
+    <div class="header" id="NpHeader">
+      <p>Bloco de Notas</p>
+      <div class="appButtons" onclick="hide_np()">
+        <img src="img/WindowIcons/HideWindow.png" alt="" />
+      </div>
+      <div class="appButtons maxandmin" onclick="max_min_np()" oncontextmenu="snap_np(event)">
+        <img src="img/WindowIcons/Maximize.png" alt="" id="iconMaxMinNP" />
+      </div>
+      <div class="appButtons maxandminmobile" onclick="mobile_snap_np()">
+        <img src="img/WindowIcons/MoveWindow.png" alt="">
+      </div>
+      <div class="appButtons close" id="Np" onclick="closeApp(id)">
+        <img src="img/WindowIcons/Close.png" alt="" />
+      </div>
+    </div>
+    <div class="snapStyle" id="npSnap">
+      <div class="snapOptions">
+        <div class="snap50" onclick="npL50()"></div>
+        <div class="snap50" onclick="npR50()"></div>
+      </div>
+      <div class="snapOptions">
+        <div class="snap25" onclick="npLT()"></div>
+        <div class="snap25" onclick="npRT()"></div>
+        <div class="snap25" onclick="npLB()"></div>
+        <div class="snap25" onclick="npRB()"></div>
+      </div>
+      <div class="snapOptions">
+        <div class="snap50" onclick="npL50()"></div>
+        <div class="snap25to50">
+          <div class="snap25" onclick="npRT()"></div>
+          <div class="snap25" onclick="npRB()"></div>
+        </div>
+
+      </div>
+      <div class="snapOptions">
+        <div class="snapI50" onclick="npT()"></div>
+        <div class="snapI50" onclick="npB()"></div>
+      </div>
+    </div>
+    <div class="snapStyleMobile" id="npSnapMobile">
+      <div class="snap25to50">
+        <div class="snapI50" onclick="npTM()"></div>
+        <div class="snapI50" onclick="npBM()"></div>
+      </div>
+      <div class="snap50" onclick="npMax()"></div>
+
+    </div>
+    <textarea name="" cols="30" rows="10" id="textNp"></textarea>
+  </div>
+
+  <!--Calculadora-->
+  <div class="calc" id="clApp" style="transform: scale(0)" onclick="focusCalc()">
+    <div class="header" id="clHeader">
+      <p>Calculadora</p>
+      <div class="appButtons" onclick="hide_cl()">
+        <img src="img/WindowIcons/HideWindow.png" alt="" />
+      </div>
+      <div class="appButtons close" id="cl" onclick="closeApp(id)">
+        <img src="img/WindowIcons/Close.png" alt="" />
+      </div>
+    </div>
+    <div class="calculator__display">0</div>
+    <div class="calcKeys">
+      <button class="key--operator" data-action="add">+</button>
+      <button class="key--operator" data-action="subtract">-</button>
+      <button class="key--operator" data-action="multiply">&times;</button>
+      <button class="key--operator" data-action="divide">÷</button>
+      <button>7</button>
+      <button>8</button>
+      <button>9</button>
+      <button>4</button>
+      <button>5</button>
+      <button>6</button>
+      <button>1</button>
+      <button>2</button>
+      <button>3</button>
+      <button>0</button>
+      <button data-action="decimal">,</button>
+      <button data-action="clear">DEL</button>
+      <button class="key--equal" data-action="calculate">=</button>
+    </div>
+  </div>
+
+  <!--Reprodutor de música-->
+  <div class="music" id="mpApp" onclick="focusMp()">
+    <div class="header" id="mpHeader">
+      <p>Reprodutor de música</p>
+      <div class="appButtons" onclick="hide_Mp()">
+        <img src="img/WindowIcons/HideWindow.png" alt="" />
+      </div>
+      <div class="appButtons maxandmin" onclick="max_min_Mp()" oncontextmenu="snap_Mp(event)">
+        <img src="img/WindowIcons/Maximize.png" alt="" id="iconMaxMinMP" />
+      </div>
+      <div class="appButtons maxandminmobile" onclick="mobile_snap_Mp()">
+        <img src="img/WindowIcons/MoveWindow.png" alt="">
+      </div>
+      <div class="appButtons close" id="mp" onclick="closeApp(id)">
+        <img src="img/WindowIcons/Close.png" alt="" />
+      </div>
+      <div class="snapStyle" id="mpSnap">
+        <div class="snapOptions">
+          <div class="snap50" onclick="mpL50()"></div>
+          <div class="snap50" onclick="mpR50()"></div>
+        </div>
+        <div class="snapOptions">
+          <div class="snap25" onclick="mpLT()"></div>
+          <div class="snap25" onclick="mpRT()"></div>
+          <div class="snap25" onclick="mpLB()"></div>
+          <div class="snap25" onclick="mpRB()"></div>
+        </div>
+        <div class="snapOptions">
+          <div class="snap50" onclick="mpL50()"></div>
+          <div class="snap25to50">
+            <div class="snap25" onclick="mpRT()"></div>
+            <div class="snap25" onclick="mpRB()"></div>
+          </div>
+
+        </div>
+        <div class="snapOptions">
+          <div class="snapI50" onclick="mpT()"></div>
+          <div class="snapI50" onclick="mpB()"></div>
+        </div>
+      </div>
+      <div class="snapStyleMobile" id="mpSnapMobile">
+        <div class="snap25to50">
+          <div class="snapI50" onclick="mpTM()"></div>
+          <div class="snapI50" onclick="mpBM()"></div>
+        </div>
+        <div class="snap50" onclick="mpMax()"></div>
+
+      </div>
+    </div>
+    <div class="nameandcover">
+      <img src="img/MusicPlayer/NormalCover.png" alt="">
+      <p id="songName">O nome da música aparecerá aqui</p>
+      <label for="chooseSong">Escolha a sua música</label>
+      <input type="file" name="" id="chooseSong" style="display: none;" accept="audio/*">
+      <audio src="" id="songByUser"></audio>
+    </div>
+    <div class="player">
+      <div class="volume">
+        <div class="playerIcons">
+          
+        </div>
+        <input type="range" value="100" max="100" id="volSlid">
+        <p id="volnum"></p>
+      </div>
+      <div class="songTime">
+        <p id="actualTime">00:00</p>
+        <input type="range" name="" id="" class="timeSong" value="0">
+        <p id="totalTime">00:00</p>
+      </div>
+
+      <div class="playerIcons simpleB" id="repeatb" onclick="repeater()"></div>
+      <div class="playerIcons playB" onclick="playorpause()"></div>
+      <div class="playerIcons simpleB"></div>
+
+    </div>
+  </div>
+
+  <!--Jogo do Fantasma-->
+  <div class="ghost" id="ghostApp" onclick="focusGh()">
+    <div class="header" id="ghostHeader">
+      <p>Ghost</p>
+      <div class="appButtons" onclick="hideGhost()">
+        <img src="img/WindowIcons/HideWindow.png" alt="" />
+      </div>
+      <div class="appButtons maxandmin" onclick="max_min_ghost()" oncontextmenu="snap_ghost(event)">
+        <img src="img/WindowIcons/Maximize.png" alt="" id="iconMaxMinGh" />
+      </div>
+      <div class="appButtons maxandminmobile" onclick="mobile_snap_ghost()">
+        <img src="img/WindowIcons/MoveWindow.png" alt="">
+      </div>
+      <div class="appButtons close" id="gh1" onclick="closeApp(id)">
+        <img src="img/WindowIcons/Close.png" alt="" />
+      </div>
+      <div class="snapStyle" id="ghSnap">
+        <div class="snapOptions">
+          <div class="snap50" onclick="ghL50()"></div>
+          <div class="snap50" onclick="ghR50()"></div>
+        </div>
+        <div class="snapOptions">
+          <div class="snap25" onclick="ghLT()"></div>
+          <div class="snap25" onclick="ghRT()"></div>
+          <div class="snap25" onclick="ghLB()"></div>
+          <div class="snap25" onclick="ghRB()"></div>
+        </div>
+        <div class="snapOptions">
+          <div class="snap50" onclick="ghL50()"></div>
+          <div class="snap25to50">
+            <div class="snap25" onclick="ghRT()"></div>
+            <div class="snap25" onclick="ghRB()"></div>
+          </div>
+
+        </div>
+        <div class="snapOptions">
+          <div class="snapI50" onclick="ghT()"></div>
+          <div class="snapI50" onclick="ghB()"></div>
+        </div>
+      </div>
+      <div class="snapStyleMobile" id="ghSnapMobile">
+        <div class="snap25to50">
+          <div class="snapI50" onclick="ghTM()"></div>
+          <div class="snapI50" onclick="ghBM()"></div>
+        </div>
+        <div class="snap50" onclick="ghostMax()"></div>
+
+      </div>
+    </div>
+    <div class="maxSign" id="mSign">Max.Score: 00000</div>
+    <div class="scoreSign" id="scrSign">Score: 00000</div>
+    <div class="flyAlert" id="flyPos">Descansado</div>
+    <div class="game" onclick="jump()" oncontextmenu="fly(event)">
+      <div class="clouds"></div>
+      <div class="soil"></div>
+      <div id="crystal" class="type1"></div>
+      <div id="ghost" class="normal"></div>
+      <div class="gameAlerts">
+        <p>Game Over</p>
+        <button onclick="clearCrystal()"></button>
+      </div>
+    </div>
+    <div class="inst">
+      Clique na tela do jogo para pular sobre os cristais<br>
+      Cuidado! Alguns cristais podem aparecer aleatoriamente<br>
+      Dica: ao chegar nos últimos dois digitos acima de 90, use o "voar".<br>
+      Para usar, aperte com o botão direito do mouse ou aperte e segure em telas touch.
+    </div>
+  </div>
+
+  <!--Configurações do site-->
+  <div class="settings" id="settingApp" onclick="focusSet()">
+    <div class="header" id="settingHeader">
+      <div class="appButtons home" id="settingHomeButton" onclick="settingsGoTo(id)" style="display: none;">
+        
+      </div>
+      <p id="settingAppName">Configurações</p>
+      <div class="appButtons" onclick="hideSett()">
+        <img src="img/WindowIcons/HideWindow.png" alt="" />
+      </div>
+      <div class="appButtons maxandmin" onclick="max_min_Sett()" oncontextmenu="snap_Sett(event)">
+        <img src="img/WindowIcons/Maximize.png" alt="" id="iconMaxMinSetting" />
+      </div>
+      <div class="appButtons maxandminmobile" onclick="mobile_snap_Sett()">
+        <img src="img/WindowIcons/MoveWindow.png" alt="">
+      </div>
+      <div class="appButtons close" id="setting" onclick="closeApp(id)">
+        <img src="img/WindowIcons/Close.png" alt="" />
+      </div>
+      <div class="snapStyle" id="settingSnap">
+        <div class="snapOptions">
+          <div class="snap50" onclick="stL50()"></div>
+          <div class="snap50" onclick="stR50()"></div>
+        </div>
+        <div class="snapOptions">
+          <div class="snap25" onclick="stLT()"></div>
+          <div class="snap25" onclick="stRT()"></div>
+          <div class="snap25" onclick="stLB()"></div>
+          <div class="snap25" onclick="stRB()"></div>
+        </div>
+        <div class="snapOptions">
+          <div class="snap50" onclick="stL50()"></div>
+          <div class="snap25to50">
+            <div class="snap25" onclick="stRT()"></div>
+            <div class="snap25" onclick="stRB()"></div>
+          </div>
+
+        </div>
+        <div class="snapOptions">
+          <div class="snapI50" onclick="stT()"></div>
+          <div class="snapI50" onclick="stB()"></div>
+        </div>
+      </div>
+      <div class="snapStyleMobile" id="settingSnapMobile">
+        <div class="snap25to50">
+          <div class="snapI50" onclick="stTM()"></div>
+          <div class="snapI50" onclick="stBM()"></div>
+        </div>
+        <div class="snap50" onclick="settingMax()"></div>
+
+      </div>
+    </div>
+
+    <div class="settingsLeftBar">
+      <button class="settingsBarButtonActive" id="sHome" onclick="settingsGoTo(id)">Início</button>
+      <button class="settingsBarButton" id="sSys" onclick="settingsGoTo(id)">Site</button>
+      <button class="settingsBarButton" id="sPsn" onclick="settingsGoTo(id)">Personalização</butt>
+        <button class="settingsBarButton" id="sUser" onclick="settingsGoTo(id)">Usuário</button>
+        <button class="settingsBarButton" id="sAcs" onclick="settingsGoTo(id)">Acessibilidade</button>
+        <button class="settingsBarButton" id="sRst" onclick="settingsGoTo(id)">Reiniciar</button>
+        <button class="settingsBarButton" id="sAbt" onclick="settingsGoTo(id)">Sobre</button>
+    </div>
+
+    <!--Configurações: Início-->
+    <div class="settingsPanel" id="settingsHome" style="display: block;">
+      <div class="settingsPanelHeader">
+        Início
+        <div class="alertLock" onclick="unlockSettings()">
+          Config. Bloqueada, clique para desbloquear
+        </div>
+      </div>
+      <div class="settingsPanelCont">
+        <div class="panelHeader">
+          Informações gerais sobre as configurações do site
+        </div>
+        <div class="infosContainer">
+          <div class="infoHeader">
+            Site
+          </div>
+          Config. Protegida por senha: <span>Não</span><br><br>
+          Charms: Jogos habilitados: <span>Sim</span><br><br>
+          Formato do relógio: <span>24 Horas</span><br>
+        </div>
+        <div class="infosContainer">
+          <div class="infoHeader">
+            Personalização
+          </div>
+          Papel de parede do Site: <span>Por do Sol</span><br><br>
+          Tema: <span>Claro</span><br><br>
+          Transparência: <span>Ativiada</span><br><br>
+          Blur: <span>Ativado</span><br><br>
+          Cor do relógio: <span>Branco</span><br><br>
+          Fundo do relógio: <span>Desativado</span><br>
+        </div>
+        <div class="infosContainer">
+          <div class="infoHeader">
+            Usuário
+          </div>
+          Nome de usuário: <span>Não definido</span><br><br>
+          Gênero do Usuáro: <span>Não definido</span><br><br>
+          Usuário Empresárial: <span>Não</span><br>
+        </div>
+        <div class="infosContainer">
+          <div class="infoHeader">
+            Acessibilidade
+          </div>
+          Tema de Alto Contraste: <span>Não habilitado</span><br><br>
+          Tamanho de botões de pesquisa: <span>Médio</span><br><br>
+          Tamanho do Relógio: <span>Padrão</span><br><br>
+          Evitar o bloqueio da seção Acessibilidade nas Config.: <span>Sim</span><br>
+        </div>
+        <div class="infosContainer">
+          <div class="infoHeader">
+            Reinicar
+          </div>
+          Idioma de preferência: <span>Português do Brasil</span><br><br>
+          Última vez que os dados foram limpos: <span>01/01/1970</span><br><br>
+          Modo de Site de preferência: <span>Normal</span><br>
+        </div>
+      </div>
+    </div>
+
+    <!--Configurações: Site-->
+    <div class="settingsPanel" id="settingsSystem">
+      <div class="settingsPanelHeader">
+        Site
+      </div>
+      <div class="settingsPanelCont">
+        <div class="unifyHarmony">
+          <div class="settingOptionHeader">
+            Altere as seções da Charms:
+          </div>
+          <div class="harmonySettings harmonyTop">
+            <label for="lockSection1">Bloqueio:</label> <input type="checkbox" name="" id="lockSection1" checked
+              onchange="lockDisable()">
+          </div>
+          <div class="harmonySettings">
+            <label for="lockSection2">Usuário:</label> <input type="checkbox" name="" id="lockSection2" checked
+              onchange="userDisable()">
+          </div>
+          <div class="harmonySettings">
+            <label for="lockSection3">Recomendações:</label> <input type="checkbox" name="" id="lockSection3"
+              onchange="recomendationsEnable()">
+          </div>
+          <div class="harmonySettings">
+            <label for="lockSection4">Apps:</label> <input type="checkbox" name="" id="lockSection4" checked
+              onchange="appsDisable()">
+          </div>
+          <div class="harmonySettings">
+            <label for="lockSection5">Config. Rápidas*:</label> <input type="checkbox" name="" id="lockSection5" checked
+              onchange="quickSettingsDisable()">
+          </div>
+          <div class="harmonySettings harmonyBottom">
+            <label for="lockSection6">Reiniciar:</label> <input type="checkbox" name="" id="lockSection6" checked
+              onchange="resetDisable()">
+          </div>
+          *: Ao desabilitar, o botão abrirá o App Config.
+        </div><br>
+        <div class="settingOptionHeader">
+          Altere algumas configurações:
+        </div>
+        <div class="harmonySettings">
+          <label for="settingsOINT">Abrir pesquisas em nova aba</label>
+          <input type="checkbox" name="" id="settingsOINT" checked onchange="un_tab()">
+        </div>
+        <div class="harmonySettings">
+          <label for="enableGames">Habilitar jogos internos e jogos externos nas recomendações</label>
+          <input type="checkbox" name="" id="enableGames" checked onchange="enableGames()">
+        </div>
+        <div class="harmonySettings">
+          <label for="hourForm">Formato de hora AM/PM</label>
+          <input type="checkbox" name="" id="hourForm" onchange="dayCycle()">
+        </div>
+        <div class="harmonySettings">
+          Inserir senha nas Configurações
+          <button onclick="passwordToSettings()">Iniciar</button>
+        </div>
+      </div>
+    </div>
+
+    <!--Configurações: Personalização-->
+
+    <div class="settingsPanel" id="settingsPerson">
+      <div class="settingsPanelHeader">
+        Personalização
+      </div>
+      <div class="settingsPanelCont">
+        <div class="settingsPersonalizeInfo">
+          <div class="siteBack" id="settingsBackgroundImage">
+            <div class="clockPreview" id="settingsClockPrev">
+              12:00
+            </div>
+            <div class="nappPreview">
+              <div class="nappHeader"></div>
+            </div>
+            <div class="mappPreview"></div>
+            <div class="charmsPreview">
+              <div class="charmsPreButton"></div>
+              <div class="charmsPreButton"></div>
+              <div class="charmsPreButton"></div>
+              <div class="charmsPreButton"></div>
+              <div class="charmsPreButton"></div>
+              <div class="charmsPreButton"></div>
+            </div>
+          </div>
+          <div class="contentPerson">
+            <span>Aparência geral do Site:</span><br><br>
+            Papel de parede: Por do Sol;<br>
+            <!--Transparência: Ativada;<br>
+            Blur: Ativado;<br>-->
+            Cor do Relógio: Branco;<br>
+            Tema do site: Claro;<br>
+            Fundo do Relógio: Desabilitado.
+          </div>
+        </div>
+        <div class="settingOptionHeader">
+          Papel de parede:
+        </div>
+        <div class="harmonySettingsOptions">
+          <div class="harmonyOption" id="bopt1" onclick="image1(), applyimg()"></div>
+          <div class="harmonyOption" id="bopt2" onclick="image2(), applyimg()"></div>
+          <div class="harmonyOption" id="bopt3" onclick="image3(), applyimg()"></div>
+          <div class="harmonyOption" id="bopt4" onclick="image4(), applyimg()"></div>
+          <div class="harmonyOption" id="bopt5" onclick="image5(), applyimg()"></div>
+          <div class="harmonyOption" id="bopt6" onclick="image6(), applyimg()"></div>
+          <div class="harmonyOption" id="bopt7" onclick="colorImage(), applyimg()"></div>
+          <div class="harmonyOption" id="bopt8" onclick="selectColorImage(), applyimg()"
+            ondblclick="selectColorImage(), forceAppearPopup()"></div>
+          <div class="harmonyOption" id="bopt9" onclick="colorGradient(), applyimg()"></div>
+          <div class="harmonyOption" id="bopt10" onclick="selectColorGradient(), applyimg()"
+            ondblclick="selectColorGradient(), forceAppearPopup()"></div>
+          <div class="harmonyOption" id="bopt11" onclick="userImage(), applyimg()"
+            ondblclick="userImage(), forceAppearPopup()"></div>
+        </div>
+        Caso não consiga escolher a(s) cor(es), tente clicar duas vezes na opção<br>
+        Se ao voltar para o site, a imagem escolhida não esteja salva, tente salvar uma imagem menor.
+        <!--<div class="harmonySettings">
+          <label for="">Transparência:</label>
+          <input type="checkbox" name="" id="" checked>
+        </div>
+        <div class="harmonySettings">
+          <label for="">Blur:</label>
+          <input type="checkbox" name="" id="" checked>
+        </div>
+        Aviso: A transparência e blur se aplica apenas na Charms e na tela de bloqueio, não se aplica em outras áreas do site.-->
+        <div class="harmonySettings">
+          Cor do relógio:
+          <div class="twoOptDiv">
+            <button style="background-color: white;"
+              onclick="document.querySelector('.time').style.color = '#ffffff', localStorage.setItem('watchColor', 0),  settClock.style.color = '#ffffff'"></button>
+            <button style="background-color: black;"
+              onclick="document.querySelector('.time').style.color = '#191919', localStorage.setItem('watchColor', 1),  settClock.style.color = '#191919'"></button>
+          </div>
+        </div>
+        <div class="harmonySettings">
+          <label for="settingsClockBckg">Fundo no relógio</label>
+          <input type="checkbox" name="settingsClockBckg" id="settingsClockBckg" onchange="clockBckg()">
+        </div>
+        <div class="harmonySettings">
+          <label for="changeColorStyle">Tema Escuro</label>
+          <input type="checkbox" name="changeColorStyle" id="changeColorStyle" onchange="changeWebSiteTheme()">
+        </div>
+        <div class="harmonySettings">
+          <label for="changeTB">Barra de tarefas estilo Windows</label>
+          <input type="checkbox" name="" id="changeTB" onchange="pickTB()">
+        </div>
+        <div class="harmonySettings">
+          <label for="iconsAlign">Barra de tarefas Windows: Icones Centralizados</label>
+          <input type="checkbox" name="" id="iconsAlign" checked onchange="pickAlign()">
+        </div>
+      </div>
+    </div>
+
+    <!--Configurações: Usuário-->
+    <div class="settingsPanel" id="settingsUser">
+      <div class="settingsPanelHeader">
+        Usuário
+        <span id="settingsUserName">Seu nome de usuário aparecerá aqui</span>
+      </div><br>
+      <div class="settingsPanelContent">
+        <div class="harmonySettings">
+          Alterar nome de usuário:
+          <div class="txtOptDiv">
+            <input type="text" id="usernSetting">
+            <button onclick="saveName('bySettings'), userinfos()">Alterar</button>
+          </div>
+        </div>
+        <div class="harmonySettings">
+          Senha de usuário:
+          <div class="txtOptDiv">
+            <input type="password" id="settingPassw">
+            <button onclick="savePassw('bySettings')">Alterar</button>
+          </div>
+        </div>
+        <div class="harmonySettings">
+          <label for="settingsGen">Gênero:</label>
+          <select name="" id="settingsGen" onchange="genere(), userinfos()">
+            <option value="g1">Masculino</option>
+            <option value="g2">Feminino</option>
+            <option value="g3">Prefiro não dizer</option>
+          </select>
+        </div>
+        <div class="harmonySettings">
+          <label for="empUser">Usuário empresárial</label>
+          <input type="checkbox" name="" id="empUser" onchange="empUser()">
+        </div>
+        Configurar um usuário empresárial desativa automáticamente links no site que levem a lugares que possa desfocar
+        o usuário
+      </div>
+    </div>
+
+    <!--Configurações: Acessibilidade-->
+    <div class="settingsPanel" id="settingsAccess">
+      <div class="settingsPanelHeader">
+        Acessibilidade
+      </div><br>
+      <div class="settingsPanelContent">
+        <div class="harmonySettings">
+          <label for="highContrast">Tema de Alto Contraste</label>
+          <input type="checkbox" name="" id="highContrast" onchange="hcTheme()">
+        </div>
+        <div class="harmonySettings">
+          <label for="buttonsSize">Tamanho dos botões</label>
+          <select name="" id="buttonsSize" onchange="pickBtnSize(), applyBtnSize()">
+            <option value="tb1">Médio</option>
+            <option value="tb2">Pequeno</option>
+            <option value="tb3">Grande</option>
+          </select>
+        </div>
+
+        <div class="harmonySettings">
+          <label for="">Evitar bloqueio desta seção</label>
+          <input type="checkbox" name="" id="" checked>
+        </div>
+      </div>
+    </div>
+
+    <!--Configurações: Reiniciar-->
+    <div class="settingsPanel" id="settingsReset">
+      <div class="settingsPanelHeader">
+        Reiniciar
+      </div><br>
+      <div class="settingsPanelContent">
+        <div class="harmonySettings">
+          <label for="alwaysSimple">Abrir sempre no modo simples</label>
+          <input type="checkbox" name="" id="alwaysSimple" onchange="alwaysSimple()">
+        </div>
+        <div class="harmonySettings">
+          <label for="">Idioma de preferência</label>
+          <div class="twoOptDiv">
+            <button onclick="localStorage.setItem('preferLang', 'PtBr')">Português</button>
+            <button onclick="localStorage.setItem('preferLang', 'EnUs')">Inglês</button>
+          </div>
+        </div>
+        <div class="harmonySettings">
+          Trocar o idioma
+          <a href="enUsNormal.html">Trocar</a>
+        </div>
+        <div class="harmonySettings">
+          Limpar dados do site (A data da limpeza será salva)
+          <button onclick="clearEverything()">Limpar</button>
+        </div>
+        <div class="harmonySettings">
+          Limpar dados do site sem salvar a data
+          <button onclick="localStorage.clear(), location.href = 'index.html'">Limpar</button>
+        </div>
+        Esses dados incluem as suas configurações, personalizações, nomes e senhas salvas no site, e não há volta.
+      </div>
+    </div>
+
+    <!--Configurações: Sobre-->
+    <div class="settingsPanel" id="settingsAbout">
+      <div class="settingsPanelHeader">
+        Sobre
+      </div><br>
+      <div class="settingsPanelContent">
+        <div class="harmonySettings">
+          Versão do Site: D 1.1
+          <a href="https://github.com/IgorSilva-S/New_Tab_Screen/releases" target="_blank">Verifique novas versões no
+            GitHub</a>
+        </div>
+        <div class="harmonySettings">
+          Última correção de bugs: 22 de dezembro de 2023
+        </div>
+        <div class="harmonySettings">
+          Versão do Kernel NTS: 0.1
+        </div>
+        <div class="unifyHarmony">
+          <div class="harmonySettings harmonyTop">
+            Criação do site: C.E.S
+          </div>
+          <div class="harmonySettings">
+            Ideias de Interface Gráfica: Microsoft Windows 8.x, 10, 11
+          </div>
+          <div class="harmonySettings">
+            Códigos: C.E.S
+          </div>
+          <div class="harmonySettings harmonyBottom">
+            Códigos: W3Schools
+          </div>
+        </div>
+        <div class="harmonySettings">
+          Sugestões, Ideias, Críticas, Bugs?
+          <a href="https://github.com/IgorSilva-S/New_Tab_Screen/issues" target="_blank">Abra uma Issue no GitHub</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Ajuda para iniciar com a Charms-->
+  <div class="helpWithCharms" onmouseover="hideHelp()">
+
+  </div>
+
+  <!--Charms para mobiles: Abrir-->
+  <div class="openMobileCharms" onclick="openCharms()">
+    <div class="lines"></div>
+    <div class="lines"></div>
+    <div class="lines"></div>
+  </div>
+
+  <!--Quando minúsculo: Normal-->
+  <div class="nTaskB" id="nTB">
+    <div class="appHided notepadHide" onclick="appear_np()" id="npHided">
+      Bloco de Notas
+    </div>
+    <div class="appHided calcHide" onclick="appear_cl()" id="clHided">
+      Calculadora
+    </div>
+    <div class="appHided mpHide" onclick="appear_mp()" id="mpHided">
+      Reprodutor de música
+    </div>
+    <div class="appHided ghostHide" onclick="appear_ghost()" id="ghostHided">
+      Ghost
+    </div>
+
+    <div class="appHided settingsHide" id="settingHided" onclick="appear_setting()">
+      Configurações
+    </div>
+  </div>
+
+  <!--Quando minúsculo: Estilo Windows-->
+  <div class="winTaskB" id="wTB">
+    <div class="appIcons npIcon" onclick="appear_np(), focusNp()"></div>
+    <div class="appIcons calcIcon" onclick="appear_cl(), focusCalc()"></div>
+    <div class="appIcons mpIcon" onclick="appear_mp(), focusMp()"></div>
+    <div class="appIcons ghostIcon" id="ghTB" onclick="appear_ghost(), focusGh()"></div>
+    <div class="appIcons settingIcon" onclick="appear_setting(), focusSet()"></div>
+  </div>
+
+  <!--Tela de bloqueio-->
+  <div class="lock" id="lockscreen">
+    <h1 style="color: white; margin: 10px 0;" id="nameLock"></h1>
+    <input type="password" name="" id="passlock" />
+    <button onclick="lockall()">Desbloquear</button>
+    <h2 style="color: red; margin: 10px 0;" id="wrongPass"></h2>
+  </div>
+  <div class="changeIsNormal" id="changeIsNormal">
+    <div class="appButtons close" style="position: absolute; right: 0; top: 0;" onclick="document.getElementById('changeIsNormal').style.display = 'none'">
+      <img src="img/WindowIcons/Close.png" alt="" />
+    </div>
+    <p>Estamos de mudança!</p>
+    O nosso projeto está passando por modificações para melhoria de interfaçe, funcionalidades e organização. Fique atento ao novo projeto.
+  </div>
+
+  <!--Protetor de tela-->
+  <div class="screenSaver" id="scrSvr" onclick="disScrSvr()">
+
+  </div>
+
+  <!--Dividindo o Português do Inglês-->
+  <div style="display: none">
+    <input type="checkbox" name="" id="enUsVersion">
+  </div>
+  <script src="js/script.js"></script>
+  <script src="js/dragWindows.js"></script>
+  <script src="js/calcScript.js"></script>
+  <script src="js/ghostGame.js"></script>
+  <script src="js/snapWindows.js"></script>
+
+</body>
+
+</html>
