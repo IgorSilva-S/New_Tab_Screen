@@ -4,6 +4,7 @@ const AZ = (n) => {
     return ('0' + n).slice(-2)
 }
 
+
 async function getHour() {
     let timeData = await fetch(timeApiLink)
     let timeJSON = await timeData.json()
@@ -22,6 +23,7 @@ function writeHour() {
     wDate = new Date(date)
     if (typeof (date) === 'number') {
         document.getElementById('hour').innerHTML = `${AZ(wDate.getHours())}:${AZ(wDate.getMinutes())}`
+        document.getElementById('date').innerHTML = `${lang.weekday[wDate.getDay()]}, ${AZ(wDate.getDate())}${lang.watchDivider} ${lang.month[wDate.getMonth()]}${lang.watchDivider} ${wDate.getFullYear()}`
     } else {
         document.getElementById('hour').innerHTML = '.........'
     }

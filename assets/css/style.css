@@ -11,28 +11,48 @@ body {
     background-size: cover;
     background-position: center;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: column;
+    box-sizing: border-box;
+    padding-top: 100px;
     gap: 20px;
 }
 
+.watchContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 #hour {
-    font-size: 120px;
+    font-size: 110px;
+}
+
+#date {
+    font-size: 30px;
+    margin-bottom: 10px;
 }
 
 #searchInput {
     font-size: 20px;
     padding: 10px 0;
-    padding-left: 20px;
+    padding-left: 30px;
     border-radius: 120px;
     min-width: 40%;
     transition-duration: .2s;
-    border: 2px solid #888;
+    border: none;
+    box-shadow: 0 1px 8px #000;
+    box-sizing: border-box;
 }
 
 #searchInput:focus {
     outline: none;
     min-width: 45%;
-    border-color: rebeccapurple;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #191919;
+    }
 }
