@@ -27,8 +27,12 @@ const langs = {
             11: 'december'
         },
         'watchDivider': ',',
-        'inputPH': 'Start searching here',
-
+        'inputPH': 'Search with',
+        'extraPH': 'or insert a link',
+        'engineButtonHint': 'Right-click to choose your search engine',
+        'wallShow': 'Show wallpaper',
+        'wallHide': 'Hide wallpaper',
+        'clear': 'Clear data'
     },
     'pt': {
         'title': 'Nova Aba',
@@ -56,7 +60,12 @@ const langs = {
             11: 'dezembro'
         },
         'watchDivider': ' de',
-        'inputPH': 'Comece a pesquisar por aqui'
+        'inputPH': 'Pesquisar com',
+        'extraPH': 'ou insira um link',
+        'engineButtonHint': 'Pressione com o botão direito para escolher o seu mecanismo de pesquisa',
+        'wallShow': 'Mostrar papel de parede',
+        'wallHide': 'Esconder papel de parede',
+        'clear': 'Limpar dados'
     }
 
 }
@@ -65,4 +74,5 @@ const lang = langs[userLang]
 
 document.documentElement.lang = userLang
 document.title = lang.title
-document.getElementById('searchInput').placeholder = lang.inputPH
+document.getElementById('engBtn').title = lang.engineButtonHint
+document.getElementById('clear').innerText = lang.clear

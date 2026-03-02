@@ -1,6 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+@font-face {
+    font-family: 'Segoe Fluent Icons';
+    src: url(../font/SFI.ttf);
+}
+
+:root {
+    --size40: 10px;
+    --size45: 20px;
+}
+
 * {
     padding: 0;
     margin: 0;
+    font-family: "Outfit", sans-serif;
 }
 
 body {
@@ -17,12 +30,20 @@ body {
     box-sizing: border-box;
     padding-top: 100px;
     gap: 20px;
+    overflow: hidden;
+}
+
+[type='icon'] {
+    font-family: 'Segoe Fluent Icons';
 }
 
 .watchContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: #fff5;
+    padding: 0 20px;
+    border-radius: 8px;
 }
 
 #hour {
@@ -34,12 +55,47 @@ body {
     margin-bottom: 10px;
 }
 
+.searchBarContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.searchBarContainer button {
+    height: 100%;
+    position: absolute;
+    aspect-ratio: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    border-radius: 50%;
+    border: none;
+}
+
+.searchBarContainer button img {
+    width: 60%;
+    aspect-ratio: 1;
+}
+
+.engineButton {
+    left: 0px;
+}
+
+#saveSearch {
+    right: 0px;
+    font-size: 20px;
+}
+
 #searchInput {
     font-size: 20px;
     padding: 10px 0;
-    padding-left: 30px;
+    padding-left: 50px;
     border-radius: 120px;
-    min-width: 40%;
+    min-width: var(--size40);
     transition-duration: .2s;
     border: none;
     box-shadow: 0 1px 8px #000;
@@ -48,11 +104,106 @@ body {
 
 #searchInput:focus {
     outline: none;
-    min-width: 45%;
+    min-width: var(--size45);
+}
+
+.contextMenu {
+    position: absolute;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px;
+    background-color: #f0f0f0cc;
+    display: none;
+    backdrop-filter: blur(10px);
+    border-radius: 6px;
+}
+
+.contextMenu button {
+    text-align: left;
+    font-size: 15px;
+    background-color: transparent;
+    border: none;
+    transition-duration: .1s;
+    padding: 5px 10px;
+    padding-right: 50px;
+    border-radius: 4px;
+    position: relative;
+}
+
+.contextMenu button:hover {
+    background-color: #fff9;
+}
+
+.recentAccess {
+    padding: 5px;
+    border-radius: 8px;
+    background-color: #ccc;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    max-width: var(--size40);
+    flex-wrap: wrap;
+}
+
+.recentAccess button {
+    aspect-ratio: 1;
+    border: 1px solid #777;
+    border-radius: 50%;
+    transition-duration: .1s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 7px;
+}
+
+.recentAccess button img {
+    width: 20px;
+    aspect-ratio: 1;
+    border-radius: 4px;
+}
+
+.recentAccess button:hover {
+    filter: brightness(1.1);
+}
+
+.recentAccess button:active {
+    filter: brightness(0.9);
 }
 
 @media (prefers-color-scheme: dark) {
     body {
         background-color: #191919;
+        color: #f0f0f0;
+    }
+
+    .watchContainer {
+        background-color: #0005;
+    }
+
+    #searchInput {
+        background-color: #000;
+        color: #f0f0f0;
+    }
+
+    [type="icon"] {
+        color: #f0f0f0;
+    }
+
+    .contextMenu {
+        background-color: #000c;
+    }
+
+    .contextMenu button {
+        color: #f0f0f0
+    }
+
+    .contextMenu button:hover {
+        background-color: #39393977;
+    }
+
+    .recentAccess {
+        background-color: #292929;
     }
 }

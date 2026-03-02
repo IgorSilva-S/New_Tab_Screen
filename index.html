@@ -10,13 +10,39 @@
 
 <body>
     <div class="watchContainer">
-        <h1 id="hour"></h1>
-        <h2 id="date"></h2>
+        <h1 id="hour">...</h1>
+        <h2 id="date">...</h2>
     </div>
-    <input type="text" name="" id="searchInput" autocomplete="false">
+    <div class="searchBarContainer">
+        <input type="text" name="" id="searchInput" autocomplete="false">
+        <button class="engineButton" id="engBtn">
+            <img src="assets/img/engines/google.png" alt="" id="engImg">
+        </button>
+        <button id="saveSearch" style="display: none">
+            <p type="icon">&#xE734;</p>
+        </button>
+    </div>
+    <div class="contextMenu" id="cmenu">
+        <button>Google</button>
+        <button>Bing</button>
+        <button>DuckDuckGo</button>
+        <button>Yahoo</button>
+        <button>Startpage</button>
+        <button>Brave Search</button>
+        <button>Ecosia</button>
+    </div>
+    <div class="recentAccess" id="recentAccess">
+
+    </div>
+    <div class="contextMenu" id="settingCM">
+        <button id="wallpaperToggle"></button>
+        <button id="clear"></button>
+    </div>
     <script src="assets/js/langs.js"></script>
     <script src="assets/js/wallpaper.js"></script>
     <script src="assets/js/time.js"></script>
+    <script src="assets/js/searches.js"></script>
+    <script src="assets/js/system.js"></script>
 </body>
 
 </html>

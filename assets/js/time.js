@@ -25,7 +25,7 @@ function writeHour() {
         document.getElementById('hour').innerHTML = `${AZ(wDate.getHours())}:${AZ(wDate.getMinutes())}`
         document.getElementById('date').innerHTML = `${lang.weekday[wDate.getDay()]}, ${AZ(wDate.getDate())}${lang.watchDivider} ${lang.month[wDate.getMonth()]}${lang.watchDivider} ${wDate.getFullYear()}`
     } else {
-        document.getElementById('hour').innerHTML = '.........'
+        document.getElementById('hour').innerHTML = '...'
     }
 }
 
