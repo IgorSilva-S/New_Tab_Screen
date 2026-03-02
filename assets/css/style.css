@@ -107,7 +107,8 @@ body {
     min-width: var(--size45);
 }
 
-.contextMenu {
+.contextMenu,
+.closeContextMenu {
     position: absolute;
     flex-direction: column;
     gap: 5px;
@@ -116,9 +117,35 @@ body {
     display: none;
     backdrop-filter: blur(10px);
     border-radius: 6px;
+    animation: openCM .15s;
 }
 
-.contextMenu button {
+.closeContextMenu {
+    animation: closeCM .15s;
+}
+
+@keyframes openCM {
+    from {
+        margin-top: -20px;
+        opacity: 0;
+    } to {
+        margin-top: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes closeCM {
+    from {
+        margin-top: 0px;
+        opacity: 1;
+    } to {
+        margin-top: 20px;
+        opacity: 0;
+    }
+}
+
+.contextMenu button,
+.closeContextMenu button {
     text-align: left;
     font-size: 15px;
     background-color: transparent;
@@ -128,9 +155,19 @@ body {
     padding-right: 50px;
     border-radius: 4px;
     position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
 }
 
-.contextMenu button:hover {
+.contextMenu button [type="icon"],
+.closeContextMenu button [type="icon"] {
+    font-size: 20px;
+}
+
+.contextMenu button:hover
+.closeContextMenu button:hover {
     background-color: #fff9;
 }
 
@@ -191,15 +228,18 @@ body {
         color: #f0f0f0;
     }
 
-    .contextMenu {
+    .contextMenu,
+    .closeContextMenu {
         background-color: #000c;
     }
 
-    .contextMenu button {
+    .contextMenu button,
+    .closeContextMenu button {
         color: #f0f0f0
     }
 
-    .contextMenu button:hover {
+    .contextMenu button:hover
+    .closeContextMenu button:hover {
         background-color: #39393977;
     }
 

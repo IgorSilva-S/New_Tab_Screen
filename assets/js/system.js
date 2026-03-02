@@ -1,7 +1,15 @@
-document.addEventListener('click', () => {
-    document.getElementById('cmenu').removeAttribute('style')
-    document.getElementById('settingCM').removeAttribute('style')
-})
+function closeContext() {
+    document.getElementById('cmenu').className = 'closeContextMenu'
+    document.getElementById('settingCM').className = 'closeContextMenu'
+    setTimeout(() => {
+        document.getElementById('cmenu').removeAttribute('style')
+        document.getElementById('cmenu').className = 'contextMenu'
+        document.getElementById('settingCM').removeAttribute('style')
+        document.getElementById('settingCM').className = 'contextMenu'
+    }, 130);
+}
+
+document.addEventListener('click', closeContext)
 
 document.addEventListener('contextmenu', (e) => {
     e.preventDefault()
@@ -10,9 +18,9 @@ document.addEventListener('contextmenu', (e) => {
     document.getElementById('settingCM').style.left = `${e.clientX}px`
 
     if (showWallpaper == true) {
-        document.getElementById('wallpaperToggle').innerText = lang.wallHide
+        document.getElementById('wallpaperToggle').innerHTML = `<span type="icon">&#xE91B;</span> ${lang.wallHide}`
     } else {
-        document.getElementById('wallpaperToggle').innerText = lang.wallShow
+        document.getElementById('wallpaperToggle').innerHTML = `<span type="icon">&#xE91B;</span> ${lang.wallShow}`
     }
 })
 
@@ -30,7 +38,7 @@ document.getElementById('wallpaperToggle').addEventListener('click', () => {
     }
 
     localStorage.setItem('wallpaper', showWallpaper)
-    document.getElementById('settingCM').removeAttribute('style')
+    closeContext()
 })
 
 document.getElementById('clear').addEventListener('click', () => {

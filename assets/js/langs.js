@@ -75,4 +75,4 @@ const lang = langs[userLang]
 document.documentElement.lang = userLang
 document.title = lang.title
 document.getElementById('engBtn').title = lang.engineButtonHint
-document.getElementById('clear').innerText = lang.clear
+document.getElementById('clear').innerHTML = `<span type="icon">&#xE75C;</span> ${lang.clear}`

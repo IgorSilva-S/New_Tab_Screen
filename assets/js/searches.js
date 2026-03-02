@@ -125,7 +125,7 @@ document.getElementById('cmenu').addEventListener('click', e => {
 
     localStorage.setItem('userEng', userEng)
 
-    document.getElementById('cmenu').removeAttribute('style')
+    closeContext()
 });
 
 let recentSearches = localStorage.getItem('recent') || '[]'
